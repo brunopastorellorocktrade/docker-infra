@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  postgres-service:
+    container_name: postgres-service
+    hostname: postgres-service
+    image: postgres:13-bullseye
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres-config:/etc/postgresql/config
+    ports:
+      - 5432:5432  # Porta padrão do PostgreSQL
+    restart: always
+    environment:
+      POSTGRES_USER: rocktrade
+      POSTGRES_PASSWORD: E2rH9Pj5YiaN1CrPcTY
+      POSTGRES_DB: rocktrade_db
+      TZ: "America/Sao_Paulo"
