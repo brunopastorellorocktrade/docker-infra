@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  n8n-infra:
+    image: docker.n8n.io/n8nio/n8n
+    ports:
+      - "127.0.0.1:5679:5678"
+    volumes:
+      - /home/ubuntu/n8n-infra-files:/home/ubuntu/.n8n
+      - /home/ubuntu/n8n-infra-local-files:/files
+      - n8n_infra_data:/home/node/.n8n
+    env_file: .env
+    restart: always
+    environment:
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_DATABASE: n8n_infra_db  # Nome do banco de dados remoto
+      DB_POSTGRESDB_HOST: 172.31.30.122  # IP do servidor remoto
+      DB_POSTGRESDB_PORT: 5432           # Porta do PostgreSQL
+      DB_POSTGRESDB_USER: n8n-infra      # Usuário do banco de dados
+      DB_POSTGRESDB_PASSWORD: s1d2vs2sad  # Senha do banco de dados
+    # Não precisa mais do depends_on, pois o banco é remoto
+
+volumes:
+  n8n_infra_data:
+    external: true
+
