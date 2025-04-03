@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+    sqldata:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        restart: always
+        ports:
+          - 1433:1433
+        volumes:
+         - "./data/:/var/opt/mssql"
+        environment:
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "86%IKs#yxbU#gus!PZZmA93bHgfsa6^sAo5mbMo@"
